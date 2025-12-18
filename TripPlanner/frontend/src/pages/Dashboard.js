@@ -17,8 +17,9 @@ const Dashboard = () => {
 
     try {
       const token = await currentUser.getIdToken();
+      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
       const response = await fetch(
-        `http://localhost:5000/delete-itinerary/${itineraryId}`,
+        `${API_URL}/delete-itinerary/${itineraryId}`,
         {
           method: "DELETE",
           headers: {
@@ -48,7 +49,9 @@ const Dashboard = () => {
         }
 
         const token = await currentUser.getIdToken();
-        const response = await fetch("http://localhost:5000/get-itineraries", {
+        const API_URL =
+          process.env.REACT_APP_API_URL || "http://localhost:5000";
+        const response = await fetch(`${API_URL}/get-itineraries`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

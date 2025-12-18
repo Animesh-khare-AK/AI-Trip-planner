@@ -31,7 +31,8 @@ const Hotels = () => {
     setHotels([]);
 
     try {
-      const response = await fetch("http://localhost:5000/find-hotels", {
+      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+      const response = await fetch(`${API_URL}/find-hotels`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,7 +73,8 @@ const Hotels = () => {
 
     try {
       const token = await currentUser.getIdToken();
-      const response = await fetch("http://localhost:5000/book-hotel", {
+      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+      const response = await fetch(`${API_URL}/book-hotel`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

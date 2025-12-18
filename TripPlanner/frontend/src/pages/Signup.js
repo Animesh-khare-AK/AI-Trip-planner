@@ -24,7 +24,8 @@ function Signup() {
       const token = await user.getIdToken();
 
       // Send user data to your Python backend
-      const response = await fetch("http://localhost:5000/save-user", {
+      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+      const response = await fetch(`${API_URL}/save-user`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
