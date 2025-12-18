@@ -13,7 +13,7 @@ app = Flask(__name__)
 CORS(app, 
      resources={
          r"/*": {
-             "origins": "http://localhost:3000",
+             "origins": ["http://localhost:3000", "https://ai-trip-planner-bgh1z61cg-animesh-khare-aks-projects.vercel.app", "https://ai-trip-planner.vercel.app"],
              "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
              "allow_headers": ["Authorization", "Content-Type"],
              "supports_credentials": True,
@@ -23,7 +23,10 @@ CORS(app,
 
 @app.after_request
 def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
+    origin = request.headers.get('Origin')
+    allowed_origins = ["http://localhost:3000", "https://ai-trip-planner-bgh1z61cg-animesh-khare-aks-projects.vercel.app", "https://ai-trip-planner.vercel.app"]
+    if origin in allowed_origins:
+        response.headers['Access-Control-Allow-Origin'] = origin
     response.headers.add('Access-Control-Allow-Headers', 'Authorization, Content-Type')
     response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
     response.headers.add('Access-Control-Allow-Credentials', 'true')
