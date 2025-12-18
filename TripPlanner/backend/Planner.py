@@ -13,7 +13,7 @@ app = Flask(__name__)
 CORS(app, 
      resources={
          r"/*": {
-             "origins": ["http://localhost:3000", "https://ai-trip-planner-bgh1z61cg-animesh-khare-aks-projects.vercel.app", "https://ai-trip-planner.vercel.app"],
+             "origins": ["http://localhost:3000", "https://ai-trip-planner-bgh1z61cg-animesh-khare-aks-projects.vercel.app", "https://ai-trip-planner.vercel.app", "https://ai-trip-planner-n1yrkjurp-animesh-khare-aks-projects.vercel.app"],
              "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
              "allow_headers": ["Authorization", "Content-Type"],
              "supports_credentials": True,
@@ -24,8 +24,8 @@ CORS(app,
 @app.after_request
 def after_request(response):
     origin = request.headers.get('Origin')
-    allowed_origins = ["http://localhost:3000", "https://ai-trip-planner-bgh1z61cg-animesh-khare-aks-projects.vercel.app", "https://ai-trip-planner.vercel.app"]
-    if origin in allowed_origins:
+    allowed_origins = ["http://localhost:3000", "https://ai-trip-planner-bgh1z61cg-animesh-khare-aks-projects.vercel.app", "https://ai-trip-planner.vercel.app", "https://ai-trip-planner-n1yrkjurp-animesh-khare-aks-projects.vercel.app"]
+    if origin in allowed_origins or (origin and origin.endswith('.vercel.app')):
         response.headers['Access-Control-Allow-Origin'] = origin
     response.headers.add('Access-Control-Allow-Headers', 'Authorization, Content-Type')
     response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
