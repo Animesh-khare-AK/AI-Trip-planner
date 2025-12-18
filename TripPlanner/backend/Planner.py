@@ -52,7 +52,7 @@ llm = ChatGroq(
 import os
 
 # APIs
-WEATHER_API_KEY = os.getenv("WEATHER_API_KEY", "your_openweathermap_api_key_here")
+WEATHER_API_KEY = os.getenv("WEATHER_API_KEY", "24e08fa8860b3e3d269b0bd427ac450d")
 BUDGET_API_KEY = os.getenv("BUDGET_API_KEY", "your_budget_api_key_here")
 
 itinerary_prompt = ChatPromptTemplate.from_messages([
