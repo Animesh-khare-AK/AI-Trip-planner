@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
+import os
+import json
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_groq import ChatGroq
@@ -26,7 +28,15 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
     response.headers.add('Access-Control-Allow-Credentials', 'true')
     return response
-cred = credentials.Certificate("./firebase-credentials.json")  
+
+# Initialize Firebase
+firebase_creds_json = os.getenv("FIREBASE_CREDENTIALS_JSON")
+if firebase_creds_json:
+    cred_dict = json.loads(firebase_creds_json)
+    cred = credentials.Certificate(cred_dict)
+else:
+    cred = credentials.Certificate("./firebase-credentials.json")
+
 firebase_admin.initialize_app(cred)
 db = firestore.client()  
 
